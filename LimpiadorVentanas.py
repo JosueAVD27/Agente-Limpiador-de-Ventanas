@@ -1,3 +1,4 @@
+#LIMPIADOR DE VENTANAS
 #Instrucciones
 #Ubicación de la ventana en donde se encuentra el dispositivo: Ingrese A - B - C (En mayúsculas)
 #Ingrese el estado en el que se encuentra la ventana: 0 = LIMPIO - 1 = SUCIO
@@ -16,6 +17,7 @@ def limpiador_ventanas():
         estado_ventana = input("Introduzca el estado de " + ubicacion_limpiador + ": ") #Especifica si la ventana esta sucia o limpia
         if estado_ventana == "0" or estado_ventana == "1":
 
+            #Ingreso de estados de las demas ventanas
             if ubicacion_limpiador == "A":
                 siguiente_ventana = input("Introduzca el estado de B: ")
                 ultima_ventana = input("Introduzca el estado de C: ")
@@ -408,7 +410,7 @@ def limpiador_ventanas():
 
 
 
-            # done cleaning
+            # Limpieza finalizada
             print("=                      ESTADO FINAL                       =")
             print("===========================================================")
             print(objetivo)
