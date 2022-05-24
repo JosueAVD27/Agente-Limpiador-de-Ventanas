@@ -422,6 +422,8 @@ def limpiador_ventanas():
             print("=                       ERROR!!                           =")
             print("=             Este no es un estado valido                 =")
             print("===========================================================")
+            print("      \n")
+            limpiador_ventanas()
 
     #Mensaje de ventanas no existentes o no disponibles
     else:
@@ -429,5 +431,8 @@ def limpiador_ventanas():
         print("=                       ERROR!!                           =")
         print("=   Esta ventana no se encuentra disponible o no existe   =")
         print("===========================================================")
+        print("      \n")
+        limpiador_ventanas()
+        
 
 limpiador_ventanas()
