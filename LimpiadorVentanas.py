@@ -2,10 +2,13 @@
 #Instrucciones
 #Ubicación de la ventana en donde se encuentra el dispositivo: Ingrese A - B - C (En mayúsculas)
 #Ingrese el estado en el que se encuentra la ventana: 0 = LIMPIO - 1 = SUCIO
-
 def limpiador_ventanas():
     # Iniciacializa el estado final
     # indica 0 si esta limpio y 1 si esta sucio
+    global objetivo
+    global ubicacion_limpiador
+    global letra_2
+    global letra_3
     objetivo = {'A': '0', 'B': '0', 'C': '0'}
     costo = 0
     print("===========================================================")
@@ -16,49 +19,49 @@ def limpiador_ventanas():
     if ubicacion_limpiador == "A" or ubicacion_limpiador == "B" or ubicacion_limpiador == "C":
         estado_ventana = input("Introduzca el estado de " + ubicacion_limpiador + ": ") #Especifica si la ventana esta sucia o limpia
         if estado_ventana == "0" or estado_ventana == "1":
-
+            
             #Ingreso de estados de las demas ventanas
             if ubicacion_limpiador == "A":
-                siguiente_ventana = input("Introduzca el estado de B: ")
-                ultima_ventana = input("Introduzca el estado de C: ")
-
-            else:
-                if ubicacion_limpiador == "B":
-                    siguiente_ventana = input("Introduzca el estado de A: ")
-                    ultima_ventana = input("Introduzca el estado de C: ")
-
-                else:
-                    if ubicacion_limpiador == "C":
-                        siguiente_ventana = input("Introduzca el estado de A: ")
-                        ultima_ventana = input("Introduzca el estado de B: ")
+                letra_2 = "B"
+                letra_3 = "C"
+                otras_ventanas()
+            if ubicacion_limpiador == "B":
+                letra_2 = "A"
+                letra_3 = "C"
+                otras_ventanas()
+            if ubicacion_limpiador == "C":
+                letra_2 = "A"
+                letra_3 = "B"
+                otras_ventanas()
 
             print("===========================================================")
             print("=    Objetivo deseado: " + str(objetivo) + "     =")
             print("===========================================================")
 
             if ubicacion_limpiador == 'A':
-                print("El limpiador se encuentra en la ventana A")
+                print("El limpiador se encuentra en la ventana " + ubicacion_limpiador)
                 # La ubicacion A se encuentra sucia
                 if estado_ventana == '1':
-                    print("La ventana A esta sucia.")
+
+                    print("La ventana "+ubicacion_limpiador+" esta sucia.")
                     # Quita la suciedad y marca como limpia
-                    objetivo['A'] = '0'
+                    limpieza_objetivo()
                     costo += 1 #Aumenta el costo de la limpieza
-                    print("Limpiando la ventana A...")
+                    print("Limpiando la ventana "+ubicacion_limpiador+"...")
                     print("Costo actual: " + str(costo))
                     print("===========================================================")
 
                     if siguiente_ventana == '1':
                         # Si B esta sucia
-                        print("La ventana B esta sucia.")
-                        print("Pasandose a la ubicacion B. ")
-                        costo += 1 #Incrementa el costo de movimiento
+                        print("La ventana "+letra_2+" esta sucia.")
+                        print("Pasandose a la ubicacion "+letra_2+".")
+                        costo += 1 #Incrementa el costo por movimiento
                         print("Costo actual: " + str(costo))
-                        # Quita la suciedad y marca como limpia
+                        # Quita la suciedad y la marca como limpia
                         objetivo['B'] = '0'
-                        costo += 1 #Incrementa el costo por limpieza
-                        print("Limpiando ventana B...")
-                        print("Costo actual: " + str(costo))
+                        costo += 1   
+                        print("Limpiando la ventana "+letra_2+"...") #Costo de limpiar
+                        print("Costo actualizado: "+str(costo))
                         print("===========================================================")
 
                     else:
@@ -164,11 +167,11 @@ def limpiador_ventanas():
                     print("El limpiador se encuentra en la ventana B")
                     # La ubicacion B se encuentra sucia
                     if estado_ventana == '1':
-                        print("La ventana B esta sucia.")
+                        print("La ventana "+ubicacion_limpiador+" esta sucia.")
                         # Quita la suciedad y marca como limpia
                         objetivo['B'] = '0'
                         costo += 1 #Aumenta el costo de la limpieza
-                        print("Limpiando la ventana B...")
+                        print("Limpiando la ventana "+ubicacion_limpiador+"...")
                         print("Costo actual: " + str(costo))
                         print("===========================================================")
 
@@ -289,11 +292,11 @@ def limpiador_ventanas():
                         print("El limpiador se encuentra en la ventana C")
                         # La ubicacion C se encuentra sucia
                         if estado_ventana == '1':
-                            print("La ventana C esta sucia.")
+                            print("La ventana "+ubicacion_limpiador+" esta sucia.")
                             # Quita la suciedad y marca como limpia
-                            objetivo['C'] = '0'
+                            objetivo['A'] = '0'
                             costo += 1 #Aumenta el costo de la limpieza
-                            print("Limpiando la ventana C...")
+                            print("Limpiando la ventana "+ubicacion_limpiador+"...")
                             print("Costo actual: " + str(costo))
                             print("===========================================================")
 
@@ -433,6 +436,19 @@ def limpiador_ventanas():
         print("===========================================================")
         print("      \n")
         limpiador_ventanas()
-        
 
+def otras_ventanas():
+    global siguiente_ventana
+    global ultima_ventana
+    siguiente_ventana = input("Introduzca el estado de "+ letra_2 + ": ")
+    ultima_ventana = input("Introduzca el estado de "+ letra_3 + ": ")
+
+def limpieza_objetivo():
+    if ubicacion_limpiador == "A":
+        objetivo['A'] = '0'
+    if ubicacion_limpiador == "B":
+        objetivo['B'] = '0'
+    if ubicacion_limpiador == "C":
+        objetivo['C'] = '0'
+        
 limpiador_ventanas()
